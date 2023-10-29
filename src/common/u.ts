@@ -1,14 +1,11 @@
+import crypto from 'crypto';
+
 class U {
-    static getRandomString(length: number): string {
-        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-        let randomString = '';
-        let index = 0;
-        while(index < length) {
-            const randomNumber = Math.floor(Math.random() * characters.length);
-            randomString += characters.charAt(randomNumber);
-            index += 1;
-        }
-        return randomString;
+    static random(): string {
+        return crypto.randomBytes(128).toString('base64');
+    }
+    static encrypt(password: string): string {
+        return crypto.createHmac('sha256', password).update('SECRET_KEY').digest('hex');
     }
 }
 
