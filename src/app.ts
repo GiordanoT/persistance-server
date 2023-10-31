@@ -23,9 +23,11 @@ const server = http.createServer(app);
 server.listen(5002);
 
 /* Database */
-mongoose.Promise = Promise;
-mongoose.connect(process.env['MONGODB_URL']).then();
-mongoose.connection.on('error', error => console.log(error));
+(async function() {
+    mongoose.Promise = Promise;
+    try {await mongoose.connect(process.env['MONGODB_URL'], {dbName: 'jjodel'});}
+    catch (error) {console.log('DB Connection error:', error);}
+})();
 
 /* Routes */
 const root = 'persistance';
