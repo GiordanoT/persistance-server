@@ -7,7 +7,8 @@ import http from 'http';
 import mongoose from 'mongoose';
 import {
     AuthRouter,
-    UsersRouter
+    UsersRouter,
+    ProjectsRouter
 } from './routes';
 
 const app = express();
@@ -33,3 +34,4 @@ server.listen(5002);
 const root = 'persistance';
 app.use(`/${root}/auth`, AuthRouter);
 app.use(`/${root}/users`, UsersRouter);
+app.use(`/${root}/projects`, ProjectsRouter);

@@ -1,12 +1,19 @@
 import {Router} from 'express';
-import AuthMiddleware from "../middlewares/auth";
+import AuthMiddleware from '../middlewares/auth';
 import UsersController from '../controllers/users';
+import ExistenceMiddleware from "../middlewares/existence";
 
 const router = Router();
 
 router
     .route('/')
     .get(AuthMiddleware.isAuthenticated, UsersController.getAll)
+
+router
+    .route('/:id')
+    .get(AuthMiddleware.isAuthenticated, ExistenceMiddleware.user, UsersController.getOne)
+    .patch(AuthMiddleware.isAuthenticated, ExistenceMiddleware.user, UsersController.update)
+    .delete(AuthMiddleware.isAuthenticated, ExistenceMiddleware.user, UsersController.delete)
 
 export {router as UsersRouter};
 

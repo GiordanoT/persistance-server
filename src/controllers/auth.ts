@@ -1,17 +1,15 @@
 import {Request, Response} from 'express';
-import Users from '../db/users';
+import {Users} from '../db';
 import U from '../common/u';
 
 class AuthController {
     static register = async (req: Request, res: Response): Promise<Response> => {
         try {
-            const {username, email, password} = req.body;
+            const {id, username, email, password} = req.body;
             if (!username || !email || !password) return res.status(400).send('Missing required parameters.');
-            const existingUser = await Users.getByEmail(email);
-            if (existingUser) return res.status(400).send('Email already taken.');
-            const user = await Users.create({
-                username,
-                email,
+            const existingEmail = await Users.getByEmail(email);
+            if (existingEmail) return res.status(400).send('Email already taken.');
+            const user = await Users.create({id, username, email,
                 authentication: {
                     password: U.encrypt(password),
                     token: U.encrypt(U.random())
