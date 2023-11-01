@@ -8,7 +8,7 @@ class PermissionsMiddleware {
         try {
             const user = await Users.getByToken(U.getToken(req));
             const {id} = req.params; const project = await Projects.getById(id);
-            if(user.id !== project.author) return res.status(201).send('Only authors can delete projects.');
+            if(user.id !== project.author) return res.status(401).send('Only authors can delete projects.');
             next();
         } catch(error) {
             return res.status(400).send(error);
