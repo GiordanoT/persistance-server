@@ -1,7 +1,7 @@
 import {Schema, model} from 'mongoose';
 
 export class Users {
-    private static Schema = new Schema({
+    protected static Schema = new Schema({
         id: {type: String, required: true},
         username: {type: String, required: true},
         email: {type: String, required: true},
@@ -11,7 +11,7 @@ export class Users {
         }
     });
 
-    private static Model = model('User', this.Schema);
+    protected static Model = model(this.name.slice(0, -1), this.Schema);
 
     static getAll = () => this.Model.find();
     static getById = (id: string) => this.Model.findOne({id});

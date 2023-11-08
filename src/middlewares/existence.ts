@@ -8,9 +8,7 @@ class ExistenceMiddleware {
             const element = await Users.getById(id);
             if(!element) return res.status(404).send('User not found.');
             return next();
-        } catch(error) {
-            return res.status(400).send(error);
-        }
+        } catch(error) {return res.status(400).send(error);}
     }
 
     static project = async(req: Request, res: Response, next: NextFunction): Promise<Response|void> => {
@@ -19,9 +17,7 @@ class ExistenceMiddleware {
             const element = await Projects.getById(id);
             if(!element) return res.status(404).send('Project not found.');
             return next();
-        } catch(error) {
-            return res.status(400).send(error);
-        }
+        } catch(error) {return res.status(400).send(error);}
     }
 }
 

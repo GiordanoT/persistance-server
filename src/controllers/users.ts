@@ -1,5 +1,5 @@
 import {Request, Response} from 'express';
-import {Users} from '../db';
+import {Users, Projects, Metamodels, Models} from '../db';
 
 class UsersController {
     static getOne = async(req: Request, res: Response): Promise<Response> => {
@@ -40,6 +40,22 @@ class UsersController {
         } catch(error) {
             return res.status(400).send(error);
         }
+    }
+
+    static projects = async(req: Request, res: Response): Promise<Response> => {
+        try {
+            const {id} = req.params;
+            const DBProjects = await Projects.getByAuthor(id); const projects = [];
+            for(const DBProject of DBProjects) {
+                const project = {}; for(const key in Projects.keys) project[key] = DBProject[key];
+                const metamodels = (await Metamodels.getByProject(DBProject.id)).map(m => m.id);
+                const models = (await Models.getByProject(DBProject.id)).map(m => m.id);
+                const graphs = [];
+                const views = [];
+                projects.push({...project, metamodels, models, graphs, views});
+            }
+            return res.status(200).send(projects);
+        } catch(error) {return res.status(400).send(error);}
     }
 }
 

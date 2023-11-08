@@ -1,22 +1,20 @@
 import {Schema, model} from 'mongoose';
 
 export class Projects {
-    private static Schema = new Schema({
-        id: {type: String, required: true},
-        name: {type: String, required: true},
-        author: {type: String, required: true},
-        isPublic: {type: Boolean, required: true},
-        metamodels: {type: [String], required: true},
-        models: {type: [String], required: true},
-        graphs: {type: [String], required: true},
-        views: {type: [String], required: true}
+    protected static Schema = new Schema({
+        id: {type: 'string', required: true},
+        className: {type: 'string', required: true},
+        pointedBy: {type: 'mixed', required: true},
+        name: {type: 'string', required: true},
+        author: {type: 'string', required: true}
     });
 
-    private static Model = model('Project', this.Schema);
+    protected static Model = model(this.name.slice(0, -1), this.Schema);
+    static keys = this.Schema.paths;
 
-    static getAll = () => this.Model.find({isPublic: true});
+    static getAll = () => this.Model.find();
     static getById = (id: string) => this.Model.findOne({id});
-    static getByAuthor = (author: string) => this.Model.findOne({author});
+    static getByAuthor = (author: string) => this.Model.find({author});
     static create = (values: Record<string, unknown>) => new this.Model(values).save().then(entity => entity.toObject());
     static delete = (id: string) => this.Model.findOneAndDelete({id});
     static update = (id, values: Record<string, unknown>) => this.Model.findOneAndUpdate({id}, values);
