@@ -1,10 +1,12 @@
+import {Schema} from 'mongoose';
+
 class Schemas {
     static PointerTargetable  = {
-        id: {type: 'string', required: true},
-        projectId: {type: 'string', required: true},
-        className: {type: 'string', required: true},
-        pointedBy: {type: 'mixed', required: true},
-        father: {type: 'string', required: false},
+        id: {type: String, required: true},
+        projectId: {type: String, required: true},
+        className: {type: String, required: true},
+        pointedBy: {type: Schema.Types.Mixed, required: true},
+        father: {type: String, required: false},
     };
     static Named = {
         ...this.PointerTargetable,
@@ -28,6 +30,10 @@ class Schemas {
         derived: {type: Boolean, required: true},
         defaultValue: {type: String, required: false}
     };
+    static Instantiable = {
+        ...this.Named,
+        instanceof: {type: String, required: false},
+    }
 }
 
 export default Schemas;

@@ -1,5 +1,6 @@
 import {Request, Response} from 'express';
 import {Users, Projects, Metamodels, Models} from '../db';
+import U from '../common/u';
 
 class UsersController {
     static getOne = async(req: Request, res: Response): Promise<Response> => {
@@ -52,7 +53,7 @@ class UsersController {
                 const models = (await Models.getByProject(DBProject.id)).map(m => m.id);
                 const graphs = [];
                 const views = [];
-                projects.push({...project, metamodels, models, graphs, views});
+                projects.push(U.clean({...project, metamodels, models, graphs, views}));
             }
             return res.status(200).send(projects);
         } catch(error) {return res.status(400).send(error);}

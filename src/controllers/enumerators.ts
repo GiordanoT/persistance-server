@@ -1,5 +1,6 @@
 import {Request, Response} from 'express';
 import {Classes, Enumerators, Literals} from '../db';
+import U from '../common/u';
 
 export class EnumeratorsController {
     static get = async(req: Request, res: Response): Promise<Response> => {
@@ -12,7 +13,7 @@ export class EnumeratorsController {
                 const enumerator = {}; for(const key in Classes.keys) enumerator[key] = DBEnumerator[key];
                 /* Literals */
                 enumerator['literals'] = (await Literals.getByFather(DBEnumerator.id)).map(l => l.id);
-                enumerators.push(enumerator);
+                enumerators.push(U.clean(enumerator));
             }
             return res.status(200).send(enumerators);
         } catch(error) {return res.status(400).send(error);}

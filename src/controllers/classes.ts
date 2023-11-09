@@ -1,5 +1,6 @@
 import {Request, Response} from 'express';
 import {Classes, Attributes, References} from '../db';
+import U from '../common/u';
 
 export class ClassesController {
     static get = async(req: Request, res: Response): Promise<Response> => {
@@ -17,7 +18,7 @@ export class ClassesController {
                 cls['attributes'] = attributes; cls['references'] = references;
                 /* Operations */
                 cls['operations'] = [];
-                classes.push(cls);
+                classes.push(U.clean(cls));
             }
             return res.status(200).send(classes);
         } catch(error) {return res.status(400).send(error);}

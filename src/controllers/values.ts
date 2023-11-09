@@ -1,25 +1,25 @@
 import {Request, Response} from 'express';
-import {Attributes} from '../db';
+import {Values} from '../db';
 import U from '../common/u';
 
-export class AttributesController {
+export class ValuesController {
     static get = async(req: Request, res: Response): Promise<Response> => {
         try {
             const {id} = req.params;
-            const DBAttributes = await Attributes.getByProject(id);
-            const attributes = [];
-            for(const DBAttribute of DBAttributes) {
-                const attribute = {}; for(const key in Attributes.keys) attribute[key] = DBAttribute[key];
-                attributes.push(U.clean(attribute));
+            const DBValues = await Values.getByProject(id);
+            const values = [];
+            for(const DBValue of DBValues) {
+                const value = {}; for(const key in Values.keys) value[key] = DBValue[key];
+                values.push(U.clean(value));
             }
-            return res.status(200).send(attributes);
+            return res.status(200).send(values);
         } catch(error) {return res.status(400).send(error);}
     }
 
     static create = async (req: Request, res: Response): Promise<Response> => {
         try {
             const {id} = req.params; const body = req.body;
-            const element = Attributes.create({...body, projectId: id});
+            const element = Values.create({...body, projectId: id});
             return res.status(200).send(element);
         } catch(error) {return res.status(400).send(error);}
     }
@@ -27,8 +27,8 @@ export class AttributesController {
     static delete = async(req: Request, res: Response): Promise<Response> => {
         try {
             const {id} = req.params;
-            await Attributes.deleteByProject(id);
-            return res.status(200).send('Attributes deleted.');
+            await Values.deleteByProject(id);
+            return res.status(200).send('Values deleted.');
         } catch(error) {return res.status(400).send(error);}
     }
 }

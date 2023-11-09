@@ -6,4 +6,6 @@ export {EnumeratorsController} from './enumerators';
 export {AttributesController} from './attributes';
 export {ReferencesController} from './references';
 export {LiteralsController} from './literals';
+export {ObjectsController} from './objects';
+export {ValuesController} from './values';
 

@@ -12,7 +12,9 @@ import {
     EnumeratorsController,
     AttributesController,
     ReferencesController,
-    LiteralsController
+    LiteralsController,
+    ObjectsController,
+    ValuesController
 } from '../controllers';
 
 const router = Router();
@@ -25,7 +27,9 @@ const endpoints = [
     {url: '/:id/enumerators', controller: EnumeratorsController},
     {url: '/:id/attributes', controller: AttributesController},
     {url: '/:id/references', controller: ReferencesController},
-    {url: '/:id/literals', controller: LiteralsController}
+    {url: '/:id/literals', controller: LiteralsController},
+    {url: '/:id/objects', controller: ObjectsController},
+    {url: '/:id/values', controller: ValuesController}
 ];
 
 for(const endpoint of endpoints) {

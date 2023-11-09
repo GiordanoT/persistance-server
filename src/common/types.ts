@@ -1,3 +1,2 @@
-import Users from '../db/users';
+export type Dictionary = {[key: string] : unknown};
 
-export type C = Users;

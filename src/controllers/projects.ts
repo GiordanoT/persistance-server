@@ -1,5 +1,5 @@
 import {Request, Response} from 'express';
-import {Projects, Metamodels, Models, Packages, Classes, Enumerators, Attributes, References} from '../db';
+import {Projects, Metamodels, Models, Packages, Classes, Enumerators, Attributes, References, Literals, Objects, Values} from '../db';
 
 class ProjectsController {
     static getOne = async(req: Request, res: Response): Promise<Response> => {
@@ -30,16 +30,19 @@ class ProjectsController {
     static delete = async(req: Request, res: Response): Promise<Response> => {
         try {
             const {id} = req.params;
-
-            await Metamodels.deleteByProject(id);
-            await Models.deleteByProject(id);
-            await Packages.deleteByProject(id);
-            await Classes.deleteByProject(id);
-            await Enumerators.deleteByProject(id);
-            await Attributes.deleteByProject(id);
-            await References.deleteByProject(id);
-
-            await Projects.delete(id);
+            await Promise.all([
+                Metamodels.deleteByProject(id),
+                Models.deleteByProject(id),
+                Packages.deleteByProject(id),
+                Classes.deleteByProject(id),
+                Enumerators.deleteByProject(id),
+                Attributes.deleteByProject(id),
+                References.deleteByProject(id),
+                Literals.deleteByProject(id),
+                Objects.deleteByProject(id),
+                Values.deleteByProject(id),
+                Projects.delete(id)
+            ]);
             return res.status(200).send('Project deleted.');
         } catch(error) {return res.status(400).send(error);}
     }

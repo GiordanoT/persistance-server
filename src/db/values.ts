@@ -1,10 +1,11 @@
 import {Schema, model} from 'mongoose';
 import Schemas from '../common/schemas';
 
-export class Enumerators {
+export class Values {
     protected static Schema = new Schema({
-        ...Schemas.Classifier,
-        serializable: {type: 'boolean', required: false}
+        ...Schemas.Instantiable,
+        values: {type: [String], required: false},
+        isMirage: {type: Boolean, required: false}
     });
     protected static Model = model(this.name.slice(0, -1), this.Schema);
     static keys = this.Schema.paths;

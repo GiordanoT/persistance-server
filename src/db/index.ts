@@ -8,3 +8,5 @@ export {Enumerators} from './enumerators';
 export {Attributes} from './attributes';
 export {References} from './references';
 export {Literals} from './literals';
+export {Objects} from './objects';
+export {Values} from './values';

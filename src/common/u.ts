@@ -1,10 +1,10 @@
 import crypto from 'crypto';
-import {Schema} from 'mongoose';
 import {Request} from 'express';
 import {
     Users,
     Projects
 } from '../db';
+import {Dictionary} from './types';
 
 class U {
     static random(): string {
@@ -21,6 +21,10 @@ class U {
     }
     static getToken(req: Request): string {
         return req.cookies['AUTH-TOKEN'] || '';
+    }
+    static clean(e: Dictionary): Dictionary {
+        delete e['_id']; delete e['__v']; delete e['projectId'];
+        return e;
     }
 }
 

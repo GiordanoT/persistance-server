@@ -1,5 +1,6 @@
 import {Request, Response} from 'express';
-import {Metamodels, Packages} from '../db';
+import {Metamodels, Models, Packages} from '../db';
+import U from '../common/u';
 
 export class MetamodelsController {
     static get = async(req: Request, res: Response): Promise<Response> => {
@@ -7,11 +8,14 @@ export class MetamodelsController {
             const {id} = req.params;
             const DBMetamodels = await Metamodels.getByProject(id);
             const metamodels = [];
-            // Building packages.
+            // Building packages & models.
             for(const DBMetamodel of DBMetamodels) {
                 const metamodel = {}; for(const key in Metamodels.keys) metamodel[key] = DBMetamodel[key];
+                /* Packages */
                 metamodel['packages'] = (await Packages.getByFather(DBMetamodel.id)).map(p => p.id);
-                metamodels.push(metamodel);
+                /* Models */
+                metamodel['models'] = (await Models.getByInstanceof(DBMetamodel.id)).map(m => m.id);
+                metamodels.push(U.clean(metamodel));
             }
             return res.status(200).send(metamodels);
         } catch(error) {return res.status(400).send(error);}

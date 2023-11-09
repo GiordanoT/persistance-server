@@ -1,12 +1,18 @@
 import {Request, Response} from 'express';
 import {Literals} from '../db';
+import U from '../common/u';
 
 export class LiteralsController {
     static get = async(req: Request, res: Response): Promise<Response> => {
         try {
             const {id} = req.params;
             const DBLiterals = await Literals.getByProject(id);
-            return res.status(200).send(DBLiterals);
+            const literals = [];
+            for(const DBLiteral of DBLiterals) {
+                const literal = {}; for(const key in Literals.keys) literal[key] = DBLiteral[key];
+                literals.push(U.clean(literal));
+            }
+            return res.status(200).send(literals);
         } catch(error) {return res.status(400).send(error);}
     }
 

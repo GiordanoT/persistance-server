@@ -17,11 +17,9 @@ class AuthController {
                 }
             });
             res.cookie('AUTH-TOKEN', user.authentication.token, {domain: process.env['DOMAIN'], path: '/'});
-            delete user['authentication'];
-            return res.status(200).send(user);
-        } catch (error) {
-            return res.status(400).send(error);
-        }
+            delete user['authentication']; delete user['_id']; delete user['__v'];
+            return res.status(200).send(U.clean(user));
+        } catch (error) {return res.status(400).send(error);}
     }
 
     static login = async (req: Request, res: Response): Promise<Response> => {
@@ -34,11 +32,9 @@ class AuthController {
             user.authentication.token = U.encrypt(U.random());
             await user.save();
             res.cookie('AUTH-TOKEN', user.authentication.token, {domain: process.env['DOMAIN'], path: '/'});
-            delete user['authentication'];
+            delete user['authentication']; delete user['_id']; delete user['__v'];
             return res.status(200).send(user);
-        } catch (error) {
-            return res.status(400).send(error);
-        }
+        } catch (error) {return res.status(400).send(error);}
     }
 
     static logout = async (req: Request, res: Response): Promise<Response> => {
@@ -49,9 +45,7 @@ class AuthController {
             await user.save();
             res.cookie('AUTH-TOKEN', '', {domain: process.env['DOMAIN'], path: '/'});
             return res.status(200).send('Logged out.');
-        } catch (error) {
-            return res.status(400).send(error);
-        }
+        } catch (error) {return res.status(400).send(error);}
     }
 }
 
