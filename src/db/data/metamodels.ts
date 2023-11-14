@@ -1,7 +1,7 @@
 import {Schema, model} from 'mongoose';
-import Schemas from '../common/schemas';
+import Schemas from '../../common/schemas';
 
-export class Metamodels {
+export class Metamodels {s
     protected static Schema = new Schema({
         ...Schemas.Named,
         isMetamodel: {type: 'boolean', required: true},

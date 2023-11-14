@@ -1,6 +1,6 @@
 import {Request, Response} from 'express';
-import {Objects, Values} from '../db';
-import U from '../common/u';
+import {Objects, Values} from '../../db';
+import U from '../../common/u';
 
 export class ObjectsController {
     static get = async(req: Request, res: Response): Promise<Response> => {

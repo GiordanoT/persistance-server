@@ -1,11 +1,15 @@
-export {MetamodelsController} from './metamodels';
-export {ModelsController} from './models';
-export {PackagesController} from './packages';
-export {ClassesController} from './classes';
-export {EnumeratorsController} from './enumerators';
-export {AttributesController} from './attributes';
-export {ReferencesController} from './references';
-export {LiteralsController} from './literals';
-export {ObjectsController} from './objects';
-export {ValuesController} from './values';
+/* DATA  */
+export {UsersController} from './data/users';
+export {AuthController} from './data/auth';
+export {ProjectsController} from './data/projects';
+export {MetamodelsController} from './data/metamodels';
+export {ModelsController} from './data/models';
+export {PackagesController} from './data/packages';
+export {ClassesController} from './data/classes';
+export {EnumeratorsController} from './data/enumerators';
+export {AttributesController} from './data/attributes';
+export {ReferencesController} from './data/references';
+export {LiteralsController} from './data/literals';
+export {ObjectsController} from './data/objects';
+export {ValuesController} from './data/values';
 

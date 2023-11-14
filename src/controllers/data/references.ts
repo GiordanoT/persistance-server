@@ -1,5 +1,5 @@
 import {Request, Response} from 'express';
-import {References} from '../db';
+import {References} from '../../db';
 
 export class ReferencesController {
     static get = async(req: Request, res: Response): Promise<Response> => {

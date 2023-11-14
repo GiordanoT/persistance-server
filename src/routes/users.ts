@@ -1,8 +1,7 @@
 import {Router} from 'express';
 import AuthMiddleware from '../middlewares/auth';
-import UsersController from '../controllers/users';
+import {UsersController} from '../controllers';
 import ExistenceMiddleware from '../middlewares/existence';
-import PermissionsMiddleware from '../middlewares/permissions';
 
 const router = Router();
 

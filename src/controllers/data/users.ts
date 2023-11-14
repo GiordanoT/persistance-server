@@ -1,8 +1,8 @@
 import {Request, Response} from 'express';
-import {Users, Projects, Metamodels, Models} from '../db';
-import U from '../common/u';
+import {Users, Projects, Metamodels, Models} from '../../db';
+import U from '../../common/u';
 
-class UsersController {
+export class UsersController {
     static getOne = async(req: Request, res: Response): Promise<Response> => {
         try {
             const {id} = req.params;
@@ -59,5 +59,3 @@ class UsersController {
         } catch(error) {return res.status(400).send(error);}
     }
 }
-
-export default UsersController;

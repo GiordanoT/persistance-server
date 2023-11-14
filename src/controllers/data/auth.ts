@@ -1,8 +1,8 @@
 import {Request, Response} from 'express';
-import {Users} from '../db';
-import U from '../common/u';
+import {Users} from '../../db';
+import U from '../../common/u';
 
-class AuthController {
+export class AuthController {
     static register = async (req: Request, res: Response): Promise<Response> => {
         try {
             const {username, email, password} = req.body;
@@ -48,5 +48,3 @@ class AuthController {
         } catch (error) {return res.status(400).send(error);}
     }
 }
-
-export default AuthController;

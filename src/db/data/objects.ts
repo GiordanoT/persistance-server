@@ -1,15 +1,9 @@
 import {Schema, model} from 'mongoose';
-import Schemas from '../common/schemas';
+import Schemas from '../../common/schemas';
 
-export class Classes {
+export class Objects {
     protected static Schema = new Schema({
-        ...Schemas.Classifier,
-        abstract: {type: Boolean, required: true},
-        interface: {type: Boolean, required: true},
-        extends: {type: [String], required: true},
-        isPrimitive: {type: Boolean, required: true},
-        implements: {type: [String], required: true},
-        partial: {type: Boolean, required: true}
+        ...Schemas.Instantiable
     });
     protected static Model = model(this.name.slice(0, -1), this.Schema);
     static keys = this.Schema.paths;

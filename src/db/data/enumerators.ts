@@ -1,11 +1,10 @@
 import {Schema, model} from 'mongoose';
-import Schemas from '../common/schemas';
+import Schemas from '../../common/schemas';
 
-export class Packages {
+export class Enumerators {
     protected static Schema = new Schema({
-        ...Schemas.Named,
-        uri: {type: 'string', required: false},
-        prefix: {type: 'string', required: false}
+        ...Schemas.Classifier,
+        serializable: {type: 'boolean', required: false}
     });
     protected static Model = model(this.name.slice(0, -1), this.Schema);
     static keys = this.Schema.paths;

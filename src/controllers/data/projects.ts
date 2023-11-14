@@ -1,7 +1,7 @@
 import {Request, Response} from 'express';
-import {Projects, Metamodels, Models, Packages, Classes, Enumerators, Attributes, References, Literals, Objects, Values} from '../db';
+import {Projects, Metamodels, Models, Packages, Classes, Enumerators, Attributes, References, Literals, Objects, Values} from '../../db';
 
-class ProjectsController {
+export class ProjectsController {
     static getOne = async(req: Request, res: Response): Promise<Response> => {
         try {
             const {id} = req.params;
@@ -47,5 +47,3 @@ class ProjectsController {
         } catch(error) {return res.status(400).send(error);}
     }
 }
-
-export default ProjectsController;

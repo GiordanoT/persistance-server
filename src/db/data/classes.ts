@@ -1,11 +1,15 @@
 import {Schema, model} from 'mongoose';
-import Schemas from '../common/schemas';
+import Schemas from '../../common/schemas';
 
-export class Values {
+export class Classes {
     protected static Schema = new Schema({
-        ...Schemas.Instantiable,
-        values: {type: [String], required: false},
-        isMirage: {type: Boolean, required: false}
+        ...Schemas.Classifier,
+        abstract: {type: Boolean, required: true},
+        interface: {type: Boolean, required: true},
+        extends: {type: [String], required: true},
+        isPrimitive: {type: Boolean, required: true},
+        implements: {type: [String], required: true},
+        partial: {type: Boolean, required: true}
     });
     protected static Model = model(this.name.slice(0, -1), this.Schema);
     static keys = this.Schema.paths;

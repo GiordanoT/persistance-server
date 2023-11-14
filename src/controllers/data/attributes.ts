@@ -1,25 +1,25 @@
 import {Request, Response} from 'express';
-import {Literals} from '../db';
-import U from '../common/u';
+import {Attributes} from '../../db';
+import U from '../../common/u';
 
-export class LiteralsController {
+export class AttributesController {
     static get = async(req: Request, res: Response): Promise<Response> => {
         try {
             const {id} = req.params;
-            const DBLiterals = await Literals.getByProject(id);
-            const literals = [];
-            for(const DBLiteral of DBLiterals) {
-                const literal = {}; for(const key in Literals.keys) literal[key] = DBLiteral[key];
-                literals.push(U.clean(literal));
+            const DBAttributes = await Attributes.getByProject(id);
+            const attributes = [];
+            for(const DBAttribute of DBAttributes) {
+                const attribute = {}; for(const key in Attributes.keys) attribute[key] = DBAttribute[key];
+                attributes.push(U.clean(attribute));
             }
-            return res.status(200).send(literals);
+            return res.status(200).send(attributes);
         } catch(error) {return res.status(400).send(error);}
     }
 
     static create = async (req: Request, res: Response): Promise<Response> => {
         try {
             const {id} = req.params; const body = req.body;
-            const element = Literals.create({...body, projectId: id});
+            const element = Attributes.create({...body, projectId: id});
             return res.status(200).send(element);
         } catch(error) {return res.status(400).send(error);}
     }
@@ -27,8 +27,8 @@ export class LiteralsController {
     static delete = async(req: Request, res: Response): Promise<Response> => {
         try {
             const {id} = req.params;
-            await Literals.deleteByProject(id);
-            return res.status(200).send('Literals deleted.');
+            await Attributes.deleteByProject(id);
+            return res.status(200).send('Attributes deleted.');
         } catch(error) {return res.status(400).send(error);}
     }
 }

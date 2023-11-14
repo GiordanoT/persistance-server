@@ -1,15 +1,11 @@
 import {Schema, model} from 'mongoose';
-import Schemas from '../common/schemas';
+import Schemas from '../../common/schemas';
 
-export class References {
+export class Packages {
     protected static Schema = new Schema({
-        ...Schemas.Feature,
-        containment: {type: Boolean, required: true},
-        container: {type: Boolean, required: true},
-        resolveProxies: {type: Boolean, required: true},
-        opposite: {type: String, required: false},
-        // target: {type: [String], required: false},
-        // edges: {type: [String], required: false},
+        ...Schemas.Named,
+        uri: {type: 'string', required: false},
+        prefix: {type: 'string', required: false}
     });
     protected static Model = model(this.name.slice(0, -1), this.Schema);
     static keys = this.Schema.paths;

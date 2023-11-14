@@ -1,10 +1,10 @@
 import {Router} from 'express';
 import AuthMiddleware from '../middlewares/auth';
-import ProjectsController from '../controllers/projects';
 import PermissionsMiddleware from '../middlewares/permissions';
 import ExistenceMiddleware from '../middlewares/existence';
 import RouterBuilder from '../common/router';
 import {
+    ProjectsController,
     MetamodelsController,
     ModelsController,
     PackagesController,

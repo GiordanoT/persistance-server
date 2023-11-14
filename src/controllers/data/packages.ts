@@ -1,6 +1,6 @@
 import {Request, Response} from 'express';
-import {Packages, Classes, Enumerators} from '../db';
-import U from '../common/u';
+import {Packages, Classes, Enumerators} from '../../db';
+import U from '../../common/u';
 
 export class PackagesController {
     static get = async(req: Request, res: Response): Promise<Response> => {

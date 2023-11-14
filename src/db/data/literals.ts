@@ -1,9 +1,11 @@
 import {Schema, model} from 'mongoose';
-import Schemas from '../common/schemas';
+import Schemas from '../../common/schemas';
 
-export class Objects {
+export class Literals {
     protected static Schema = new Schema({
-        ...Schemas.Instantiable
+        ...Schemas.Named,
+        value: {type: String, required: false},
+        literal: {type: String, required: true}
     });
     protected static Model = model(this.name.slice(0, -1), this.Schema);
     static keys = this.Schema.paths;

@@ -1,6 +1,6 @@
 import {Request, Response} from 'express';
-import {Classes, Enumerators, Literals} from '../db';
-import U from '../common/u';
+import {Classes, Enumerators, Literals} from '../../db';
+import U from '../../common/u';
 
 export class EnumeratorsController {
     static get = async(req: Request, res: Response): Promise<Response> => {

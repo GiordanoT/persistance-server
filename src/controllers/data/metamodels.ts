@@ -1,6 +1,6 @@
 import {Request, Response} from 'express';
-import {Metamodels, Models, Packages} from '../db';
-import U from '../common/u';
+import {Metamodels, Models, Packages} from '../../db';
+import U from '../../common/u';
 
 export class MetamodelsController {
     static get = async(req: Request, res: Response): Promise<Response> => {
