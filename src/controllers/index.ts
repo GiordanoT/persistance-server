@@ -12,4 +12,5 @@ export {ReferencesController} from './data/references';
 export {LiteralsController} from './data/literals';
 export {ObjectsController} from './data/objects';
 export {ValuesController} from './data/values';
-
+/* VIEWS */
+export {ViewsController} from './views/views';

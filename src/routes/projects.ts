@@ -14,12 +14,14 @@ import {
     ReferencesController,
     LiteralsController,
     ObjectsController,
-    ValuesController
+    ValuesController,
+    ViewsController
 } from '../controllers';
 
 const router = Router();
 
 const endpoints = [
+    /* DATA */
     {url: '/:id/metamodels', controller: MetamodelsController},
     {url: '/:id/models', controller: ModelsController},
     {url: '/:id/packages', controller: PackagesController},
@@ -29,7 +31,10 @@ const endpoints = [
     {url: '/:id/references', controller: ReferencesController},
     {url: '/:id/literals', controller: LiteralsController},
     {url: '/:id/objects', controller: ObjectsController},
-    {url: '/:id/values', controller: ValuesController}
+    {url: '/:id/values', controller: ValuesController},
+    /* VIEWS */
+    {url: '/:id/views', controller: ViewsController}
+    /* NODES */
 ];
 
 for(const endpoint of endpoints) {

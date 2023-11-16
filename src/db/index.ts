@@ -11,3 +11,5 @@ export {References} from './data/references';
 export {Literals} from './data/literals';
 export {Objects} from './data/objects';
 export {Values} from './data/values';
+/* VIEWS */
+export {Views} from './views/views';
