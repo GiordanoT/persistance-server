@@ -10,7 +10,9 @@ export class PackagesController {
             const packages = [];
             // Building subpackages & classifiers.
             for(const DBPackage of DBPackages) {
-                const pkg = {}; for(const key in Packages.keys) pkg[key] = DBPackage[key];
+                const pkg = {};
+                for(const key in Packages.keys)
+                    pkg[key] = DBPackage[key] || U.defaultValue(Packages.keys[key]);
                 /* Subpackages */
                 pkg['subpackages'] = (await Packages.getByFather(DBPackage.id)).map(p => p.id);
                 /* Classifiers */

@@ -10,7 +10,9 @@ export class ModelsController {
             const models = [];
             // Building objects.
             for(const DBModel of DBModels) {
-                const model = {}; for(const key in Models.keys) model[key] = DBModel[key];
+                const model = {};
+                for(const key in Models.keys)
+                    model[key] = DBModel[key] || U.defaultValue(Models.keys[key]);
                 /* Objects */
                 model['objects'] = (await Objects.getByFather(DBModel.id)).map(o => o.id);
                 // todo: fix this in frontend, create 2 different views: 1 -> M2 & 2 -> M1

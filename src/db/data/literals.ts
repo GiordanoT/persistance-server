@@ -4,8 +4,8 @@ import Schemas from '../../common/schemas';
 export class Literals {
     protected static Schema = new Schema({
         ...Schemas.Named,
-        value: {type: String, required: false},
-        literal: {type: String, required: true}
+        value: {type: String},
+        literal: {type: String}
     });
     protected static Model = model(this.name.slice(0, -1), this.Schema);
     static keys = this.Schema.paths;

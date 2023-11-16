@@ -4,12 +4,12 @@ import Schemas from '../../common/schemas';
 export class References {
     protected static Schema = new Schema({
         ...Schemas.Feature,
-        containment: {type: Boolean, required: true},
-        container: {type: Boolean, required: true},
-        resolveProxies: {type: Boolean, required: true},
-        opposite: {type: String, required: false},
-        // target: {type: [String], required: false},
-        // edges: {type: [String], required: false},
+        containment: {type: Boolean},
+        container: {type: Boolean},
+        resolveProxies: {type: Boolean},
+        opposite: {type: String},
+        // target: {type: [String]},
+        // edges: {type: [String]},
     });
     protected static Model = model(this.name.slice(0, -1), this.Schema);
     static keys = this.Schema.paths;

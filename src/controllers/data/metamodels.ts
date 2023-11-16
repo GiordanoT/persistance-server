@@ -10,7 +10,9 @@ export class MetamodelsController {
             const metamodels = [];
             // Building packages & models.
             for(const DBMetamodel of DBMetamodels) {
-                const metamodel = {}; for(const key in Metamodels.keys) metamodel[key] = DBMetamodel[key];
+                const metamodel = {};
+                for(const key in Metamodels.keys)
+                    metamodel[key] = DBMetamodel[key] || U.defaultValue(Metamodels.keys[key]);
                 /* Packages */
                 metamodel['packages'] = (await Packages.getByFather(DBMetamodel.id)).map(p => p.id);
                 /* Models */

@@ -2,11 +2,11 @@ import {Schema, model} from 'mongoose';
 
 export class Projects {
     protected static Schema = new Schema({
-        id: {type: 'string', required: true},
-        className: {type: 'string', required: true},
-        pointedBy: {type: 'mixed', required: true},
-        name: {type: 'string', required: true},
-        author: {type: 'string', required: true}
+        id: {type: String},
+        className: {type: String},
+        pointedBy: {type: Schema.Types.Mixed},
+        name: {type: String},
+        author: {type: String}
     });
 
     protected static Model = model(this.name.slice(0, -1), this.Schema);

@@ -8,9 +8,11 @@ export class ClassesController {
             const {id} = req.params;
             const DBClasses = await Classes.getByProject(id);
             const classes = [];
-            // Building features & operations.
+            // Building features, operations & extendedBy.
             for(const DBClass of DBClasses) {
-                const cls = {}; for(const key in Classes.keys) cls[key] = DBClass[key];
+                const cls = {};
+                for(const key in Classes.keys)
+                    cls[key] = DBClass[key] || U.defaultValue(Classes.keys[key]);
                 /* Features */
                 const attributes = (await Attributes.getByFather(DBClass.id)).map(a => a.id);
                 const references = (await References.getByFather(DBClass.id)).map(r => r.id);
@@ -18,6 +20,8 @@ export class ClassesController {
                 cls['attributes'] = attributes; cls['references'] = references;
                 /* Operations */
                 cls['operations'] = [];
+                /* ExtendedBy */
+                cls['extendedBy'] = (await Classes.getByExtend(DBClass.id)).map(c => c.id);
                 classes.push(U.clean(cls));
             }
             return res.status(200).send(classes);

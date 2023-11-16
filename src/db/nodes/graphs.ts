@@ -1,11 +1,11 @@
 import {Schema, model} from 'mongoose';
 import Schemas from '../../common/schemas';
 
-export class Packages {
+export class Graphs {
     protected static Schema = new Schema({
-        ...Schemas.Named,
-        uri: {type: String},
-        prefix: {type: String}
+        ...Schemas.GraphElement,
+        graphSize: {type: Schema.Types.Mixed},
+        sizes: {type: Schema.Types.Mixed}
     });
     protected static Model = model(this.name.slice(0, -1), this.Schema);
     static keys = this.Schema.paths;

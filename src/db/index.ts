@@ -13,3 +13,8 @@ export {Objects} from './data/objects';
 export {Values} from './data/values';
 /* VIEWS */
 export {Views} from './views/views';
+/* NODES */
+export {Graphs} from './nodes/graphs';
+export {GraphVertexs} from './nodes/graphVertexs';
+export {VoidVertexs} from './nodes/voidVertexs';
+export {Vertexs} from './nodes/vertexs';

@@ -10,7 +10,9 @@ export class EnumeratorsController {
             const enumerators = [];
             // Building literals.
             for(const DBEnumerator of DBEnumerators) {
-                const enumerator = {}; for(const key in Classes.keys) enumerator[key] = DBEnumerator[key];
+                const enumerator = {};
+                for(const key in Classes.keys)
+                    enumerator[key] = DBEnumerator[key] || U.defaultValue(Enumerators.keys[key]);
                 /* Literals */
                 enumerator['literals'] = (await Literals.getByFather(DBEnumerator.id)).map(l => l.id);
                 enumerators.push(U.clean(enumerator));

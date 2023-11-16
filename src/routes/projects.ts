@@ -15,7 +15,11 @@ import {
     LiteralsController,
     ObjectsController,
     ValuesController,
-    ViewsController
+    ViewsController,
+    GraphsController,
+    GraphVertexsController,
+    VoidVertexsController,
+    VertexsController
 } from '../controllers';
 
 const router = Router();
@@ -33,8 +37,12 @@ const endpoints = [
     {url: '/:id/objects', controller: ObjectsController},
     {url: '/:id/values', controller: ValuesController},
     /* VIEWS */
-    {url: '/:id/views', controller: ViewsController}
+    {url: '/:id/views', controller: ViewsController},
     /* NODES */
+    {url: '/:id/graphs', controller: GraphsController},
+    {url: '/:id/graphVertexes', controller: GraphVertexsController},
+    {url: '/:id/voidVertexes', controller: VoidVertexsController},
+    {url: '/:id/vertexes', controller: VertexsController}
 ];
 
 for(const endpoint of endpoints) {

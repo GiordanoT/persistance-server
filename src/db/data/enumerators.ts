@@ -4,7 +4,7 @@ import Schemas from '../../common/schemas';
 export class Enumerators {
     protected static Schema = new Schema({
         ...Schemas.Classifier,
-        serializable: {type: 'boolean', required: false}
+        serializable: {type: Boolean}
     });
     protected static Model = model(this.name.slice(0, -1), this.Schema);
     static keys = this.Schema.paths;

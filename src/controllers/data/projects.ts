@@ -1,5 +1,22 @@
 import {Request, Response} from 'express';
-import {Projects, Metamodels, Models, Packages, Classes, Enumerators, Attributes, References, Literals, Objects, Values, Views} from '../../db';
+import {
+    Projects,
+    Metamodels,
+    Models,
+    Packages,
+    Classes,
+    Enumerators,
+    Attributes,
+    References,
+    Literals,
+    Objects,
+    Values,
+    Views,
+    Graphs,
+    GraphVertexs,
+    VoidVertexs,
+    Vertexs
+} from '../../db';
 
 export class ProjectsController {
     static getOne = async(req: Request, res: Response): Promise<Response> => {
@@ -44,6 +61,12 @@ export class ProjectsController {
                 Values.deleteByProject(id),
                 /* VIEWS */
                 Views.deleteByProject(id),
+                /* NODES */
+                Graphs.deleteByProject(id),
+                GraphVertexs.deleteByProject(id),
+                VoidVertexs.deleteByProject(id),
+                Vertexs.deleteByProject(id),
+                /* PROJECT */
                 Projects.delete(id)
             ]);
             return res.status(200).send('Project deleted.');

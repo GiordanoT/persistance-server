@@ -9,7 +9,9 @@ export class ValuesController {
             const DBValues = await Values.getByProject(id);
             const values = [];
             for(const DBValue of DBValues) {
-                const value = {}; for(const key in Values.keys) value[key] = DBValue[key];
+                const value = {};
+                for(const key in Values.keys)
+                    value[key] = DBValue[key] || U.defaultValue(Values.keys[key]);
                 values.push(U.clean(value));
             }
             return res.status(200).send(values);

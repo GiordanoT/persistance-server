@@ -10,7 +10,9 @@ export class ObjectsController {
             const objects = [];
             // Building features.
             for(const DBObject of DBObjects) {
-                const object = {}; for(const key in Objects.keys) object[key] = DBObject[key];
+                const object = {};
+                for(const key in Objects.keys)
+                    object[key] = DBObject[key] || U.defaultValue(Objects.keys[key]);
                 /* Features */
                 object['features'] = (await Values.getByFather(DBObject.id)).map(v => v.id);
                 objects.push(U.clean(object));

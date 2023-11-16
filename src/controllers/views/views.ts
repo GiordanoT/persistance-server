@@ -9,7 +9,9 @@ export class ViewsController {
             const DBViews = await Views.getByProject(id);
             const views = [];
             for(const DBView of DBViews) {
-                const view = {}; for(const key in Views.keys) view[key] = DBView[key];
+                const view = {};
+                for(const key in Views.keys)
+                    view[key] = DBView[key] || U.defaultValue(Views.keys[key]);
                 views.push(U.clean(view));
             }
             return res.status(200).send(views);

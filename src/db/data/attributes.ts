@@ -4,7 +4,7 @@ import Schemas from '../../common/schemas';
 export class Attributes {
     protected static Schema = new Schema({
         ...Schemas.Feature,
-        isID: {type: Boolean, required: true}
+        isID: {type: Boolean}
     });
     protected static Model = model(this.name.slice(0, -1), this.Schema);
     static keys = this.Schema.paths;

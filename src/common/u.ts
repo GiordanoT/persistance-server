@@ -4,7 +4,8 @@ import {
     Users,
     Projects
 } from '../db';
-import {Dictionary} from './types';
+import {Dictionary, Primitive} from './types';
+import {SchemaType} from 'mongoose';
 
 class U {
     static random(): string {
@@ -25,6 +26,14 @@ class U {
     static clean(e: Dictionary): Dictionary {
         delete e['_id']; delete e['__v']; delete e['projectId'];
         return e;
+    }
+    static defaultValue(schema: SchemaType): Primitive|Primitive[] {
+        switch (schema.instance) {
+            case 'Number': return 0;
+            case 'Boolean': return false;
+            case 'String': return '';
+            default : return [];
+        }
     }
 }
 

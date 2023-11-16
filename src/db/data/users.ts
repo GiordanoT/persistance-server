@@ -2,11 +2,11 @@ import {Schema, model} from 'mongoose';
 
 export class Users {
     protected static Schema = new Schema({
-        id: {type: String, required: true},
-        username: {type: String, required: true},
-        email: {type: String, required: true},
+        id: {type: String},
+        username: {type: String},
+        email: {type: String},
         authentication: {
-            password: {type: String, required: true, select: false},
+            password: {type: String, select: false},
             token: {type: String, select: false}
         }
     });

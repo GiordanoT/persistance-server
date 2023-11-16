@@ -9,7 +9,9 @@ export class LiteralsController {
             const DBLiterals = await Literals.getByProject(id);
             const literals = [];
             for(const DBLiteral of DBLiterals) {
-                const literal = {}; for(const key in Literals.keys) literal[key] = DBLiteral[key];
+                const literal = {};
+                for(const key in Literals.keys)
+                    literal[key] = DBLiteral[key] || U.defaultValue(Literals.keys[key]);
                 literals.push(U.clean(literal));
             }
             return res.status(200).send(literals);

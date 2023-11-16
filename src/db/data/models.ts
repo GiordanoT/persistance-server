@@ -4,8 +4,8 @@ import Schemas from '../../common/schemas';
 export class Models {
     protected static Schema = new Schema({
         ...Schemas.Named,
-        isMetamodel: {type: 'boolean', required: true},
-        instanceof: {type: 'string', required: false}
+        isMetamodel: {type: Boolean},
+        instanceof: {type: String}
     });
     protected static Model = model(this.name.slice(0, -1), this.Schema);
     static keys = this.Schema.paths;

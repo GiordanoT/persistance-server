@@ -4,8 +4,8 @@ import Schemas from '../../common/schemas';
 export class Values {
     protected static Schema = new Schema({
         ...Schemas.Instantiable,
-        values: {type: [String], required: false},
-        isMirage: {type: Boolean, required: false}
+        values: {type: [String]},
+        isMirage: {type: Boolean}
     });
     protected static Model = model(this.name.slice(0, -1), this.Schema);
     static keys = this.Schema.paths;

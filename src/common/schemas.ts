@@ -2,37 +2,54 @@ import {Schema} from 'mongoose';
 
 class Schemas {
     static PointerTargetable  = {
-        id: {type: String, required: true},
-        projectId: {type: String, required: true},
-        className: {type: String, required: true},
-        pointedBy: {type: Schema.Types.Mixed, required: true},
-        father: {type: String, required: false},
+        id: {type: String},
+        projectId: {type: String},
+        className: {type: String},
+        pointedBy: {type: Schema.Types.Mixed},
+        father: {type: String},
     };
     static Named = {
         ...this.PointerTargetable,
-        name: {type: String, required: true}
+        name: {type: String}
     };
     static Classifier = {
         ...this.Named,
-        defaultValue: {type: String, required: false}
+        defaultValue: {type: String}
     };
     static Feature = {
         ...this.Named,
-        type: {type: String, required: true},
-        ordered: {type: Boolean, required: true},
-        unique: {type: Boolean, required: true},
-        lowerBound: {type: Number, required: true},
-        upperBound: {type: Number, required: true},
-        changeable: {type: Boolean, required: true},
-        volatile: {type: Boolean, required: true},
-        transient: {type: Boolean, required: true},
-        unsettable: {type: Boolean, required: true},
-        derived: {type: Boolean, required: true},
-        defaultValue: {type: String, required: false}
+        type: {type: String},
+        ordered: {type: Boolean},
+        unique: {type: Boolean},
+        lowerBound: {type: Number},
+        upperBound: {type: Number},
+        changeable: {type: Boolean},
+        volatile: {type: Boolean},
+        transient: {type: Boolean},
+        unsettable: {type: Boolean},
+        derived: {type: Boolean},
+        defaultValue: {type: String}
     };
     static Instantiable = {
         ...this.Named,
-        instanceof: {type: String, required: false},
+        instanceof: {type: String},
+    }
+    static GraphElement = {
+        ...this.PointerTargetable,
+        graph: {type: String},
+        model: {type: String},
+        isSelected: {type: Schema.Types.Mixed},
+        state: {type: Schema.Types.Mixed},
+        x: {type: Number},
+        y: {type: Number},
+        height: {type: Number},
+        h: {type: Number},
+        width: {type: Number},
+        w: {type: Number},
+        zIndex: {type: Number},
+        view: {type: String},
+        zoom: {type: Schema.Types.Mixed},
+        favoriteNode: {type: Boolean}
     }
 }
 

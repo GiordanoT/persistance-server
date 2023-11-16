@@ -14,3 +14,8 @@ export {ObjectsController} from './data/objects';
 export {ValuesController} from './data/values';
 /* VIEWS */
 export {ViewsController} from './views/views';
+/* NODES */
+export {GraphsController} from './nodes/graphs';
+export {GraphVertexsController} from './nodes/graphVertexs';
+export {VoidVertexsController} from './nodes/voidVertexs';
+export {VertexsController} from './nodes/vertexs';
