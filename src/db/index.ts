@@ -18,3 +18,6 @@ export {Graphs} from './nodes/graphs';
 export {GraphVertexs} from './nodes/graphVertexs';
 export {VoidVertexs} from './nodes/voidVertexs';
 export {Vertexs} from './nodes/vertexs';
+export {GraphElements} from './nodes/graphElements';
+export {Edges} from './nodes/edges';
+export {EdgePoints} from './nodes/edgePoints';

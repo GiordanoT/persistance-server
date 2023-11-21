@@ -8,6 +8,9 @@ import {Dictionary, Primitive} from './types';
 import {SchemaType} from 'mongoose';
 
 class U {
+    static sleep(s: number): Promise<void> {
+        return new Promise((resolve) => setTimeout(resolve, s * 1000));
+    }
     static random(): string {
         return crypto.randomBytes(128).toString('base64');
     }
@@ -32,6 +35,7 @@ class U {
             case 'Number': return 0;
             case 'Boolean': return false;
             case 'String': return '';
+            case 'Mixed': return {};
             default : return [];
         }
     }

@@ -1,5 +1,5 @@
 import {Request, Response} from 'express';
-import {Graphs, GraphVertexs, VoidVertexs, Vertexs} from '../../db';
+import {Graphs, GraphVertexs, VoidVertexs, Vertexs, Edges} from '../../db';
 import U from '../../common/u';
 
 export class GraphsController {
@@ -16,7 +16,8 @@ export class GraphsController {
                     // Graphs.getByFather(DBGraph.id),
                     GraphVertexs.getByFather(DBGraph.id),
                     VoidVertexs.getByFather(DBGraph.id),
-                    Vertexs.getByFather(DBGraph.id)
+                    Vertexs.getByFather(DBGraph.id),
+                    Edges.getByFather(DBGraph.id)
                 ]);
                 graph['subElements'] = subElements.flatMap(r => r.map(se => se.id));
                 graphs.push(U.clean(graph));

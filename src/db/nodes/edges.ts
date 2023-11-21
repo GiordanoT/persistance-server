@@ -1,10 +1,12 @@
 import {Schema, model} from 'mongoose';
 import Schemas from '../../common/schemas';
 
-export class Graphs {
+export class Edges {
     protected static Schema = new Schema({
         ...Schemas.GraphElement,
-        sizes: {type: [Schema.Types.Mixed]}
+        start: {type: String},
+        end: {type: String},
+        midPoints: {type: [Schema.Types.Mixed]}
     });
     protected static Model = model(this.name.slice(0, -1), this.Schema);
     static keys = this.Schema.paths;

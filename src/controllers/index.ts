@@ -19,3 +19,6 @@ export {GraphsController} from './nodes/graphs';
 export {GraphVertexsController} from './nodes/graphVertexs';
 export {VoidVertexsController} from './nodes/voidVertexs';
 export {VertexsController} from './nodes/vertexs';
+export {GraphElementsController} from './nodes/graphElements';
+export {EdgesController} from './nodes/edges';
+export {EdgePointsController} from './nodes/edgePoints';

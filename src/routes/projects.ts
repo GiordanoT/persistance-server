@@ -19,7 +19,10 @@ import {
     GraphsController,
     GraphVertexsController,
     VoidVertexsController,
-    VertexsController
+    VertexsController,
+    GraphElementsController,
+    EdgesController,
+    EdgePointsController
 } from '../controllers';
 
 const router = Router();
@@ -42,7 +45,10 @@ const endpoints = [
     {url: '/:id/graphs', controller: GraphsController},
     {url: '/:id/graphVertexes', controller: GraphVertexsController},
     {url: '/:id/voidVertexes', controller: VoidVertexsController},
-    {url: '/:id/vertexes', controller: VertexsController}
+    {url: '/:id/vertexes', controller: VertexsController},
+    {url: '/:id/graphElements', controller: GraphElementsController},
+    {url: '/:id/edges', controller: EdgesController},
+    {url: '/:id/edgePoints', controller: EdgePointsController},
 ];
 
 for(const endpoint of endpoints) {

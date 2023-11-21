@@ -5,7 +5,7 @@ class Schemas {
         id: {type: String},
         projectId: {type: String},
         className: {type: String},
-        pointedBy: {type: Schema.Types.Mixed},
+        pointedBy: {type: [Schema.Types.Mixed]},
         father: {type: String},
     };
     static Named = {
@@ -49,6 +49,7 @@ class Schemas {
         zIndex: {type: Number},
         view: {type: String},
         zoom: {type: Schema.Types.Mixed},
+        graphSize: {type: Schema.Types.Mixed},
         favoriteNode: {type: Boolean}
     }
 }

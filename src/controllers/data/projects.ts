@@ -15,7 +15,10 @@ import {
     Graphs,
     GraphVertexs,
     VoidVertexs,
-    Vertexs
+    Vertexs,
+    GraphElements,
+    Edges,
+    EdgePoints
 } from '../../db';
 
 export class ProjectsController {
@@ -66,6 +69,9 @@ export class ProjectsController {
                 GraphVertexs.deleteByProject(id),
                 VoidVertexs.deleteByProject(id),
                 Vertexs.deleteByProject(id),
+                GraphElements.deleteByProject(id),
+                Edges.deleteByProject(id),
+                EdgePoints.deleteByProject(id),
                 /* PROJECT */
                 Projects.delete(id)
             ]);

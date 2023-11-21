@@ -1,5 +1,5 @@
 import {Request, Response} from 'express';
-import {Vertexs} from '../../db';
+import {Vertexs, GraphElements} from '../../db';
 import U from '../../common/u';
 
 export class VertexsController {
@@ -12,7 +12,7 @@ export class VertexsController {
                 const vertex = {};
                 for(const key in Vertexs.keys)
                     vertex[key] = DBVertex[key] || U.defaultValue(Vertexs.keys[key]);
-                // vertex['subElements'] = await Fields.getByFather(DBVertex.id).map(f => f.id);
+                vertex['subElements'] = (await GraphElements.getByFather(DBVertex.id)).map(f => f.id);
                 vertexs.push(U.clean(vertex));
             }
             return res.status(200).send(vertexs);

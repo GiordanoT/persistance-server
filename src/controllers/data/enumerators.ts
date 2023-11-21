@@ -1,5 +1,5 @@
 import {Request, Response} from 'express';
-import {Classes, Enumerators, Literals} from '../../db';
+import {Enumerators, Literals} from '../../db';
 import U from '../../common/u';
 
 export class EnumeratorsController {
@@ -11,7 +11,7 @@ export class EnumeratorsController {
             // Building literals.
             for(const DBEnumerator of DBEnumerators) {
                 const enumerator = {};
-                for(const key in Classes.keys)
+                for(const key in Enumerators.keys)
                     enumerator[key] = DBEnumerator[key] || U.defaultValue(Enumerators.keys[key]);
                 /* Literals */
                 enumerator['literals'] = (await Literals.getByFather(DBEnumerator.id)).map(l => l.id);
