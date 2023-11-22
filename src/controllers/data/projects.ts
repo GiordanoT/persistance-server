@@ -9,6 +9,8 @@ import {
     Attributes,
     References,
     Literals,
+    Operations,
+    Parameters,
     Objects,
     Values,
     Views,
@@ -60,6 +62,8 @@ export class ProjectsController {
                 Attributes.deleteByProject(id),
                 References.deleteByProject(id),
                 Literals.deleteByProject(id),
+                Operations.deleteByProject(id),
+                Parameters.deleteByProject(id),
                 Objects.deleteByProject(id),
                 Values.deleteByProject(id),
                 /* VIEWS */

@@ -12,6 +12,8 @@ import {
     EnumeratorsController,
     AttributesController,
     ReferencesController,
+    OperationsController,
+    ParametersController,
     LiteralsController,
     ObjectsController,
     ValuesController,
@@ -30,13 +32,15 @@ const router = Router();
 const endpoints = [
     /* DATA */
     {url: '/:id/metamodels', controller: MetamodelsController},
-    {url: '/:id/models', controller: ModelsController},
     {url: '/:id/packages', controller: PackagesController},
     {url: '/:id/classes', controller: ClassesController},
-    {url: '/:id/enumerators', controller: EnumeratorsController},
     {url: '/:id/attributes', controller: AttributesController},
     {url: '/:id/references', controller: ReferencesController},
+    {url: '/:id/operations', controller: OperationsController},
+    {url: '/:id/parameters', controller: ParametersController},
+    {url: '/:id/enumerators', controller: EnumeratorsController},
     {url: '/:id/literals', controller: LiteralsController},
+    {url: '/:id/models', controller: ModelsController},
     {url: '/:id/objects', controller: ObjectsController},
     {url: '/:id/values', controller: ValuesController},
     /* VIEWS */
@@ -48,7 +52,7 @@ const endpoints = [
     {url: '/:id/vertexes', controller: VertexsController},
     {url: '/:id/graphElements', controller: GraphElementsController},
     {url: '/:id/edges', controller: EdgesController},
-    {url: '/:id/edgePoints', controller: EdgePointsController},
+    {url: '/:id/edgePoints', controller: EdgePointsController}
 ];
 
 for(const endpoint of endpoints) {

@@ -8,6 +8,8 @@ export {Classes} from './data/classes';
 export {Enumerators} from './data/enumerators';
 export {Attributes} from './data/attributes';
 export {References} from './data/references';
+export {Operations} from './data/operations';
+export {Parameters} from './data/parameters';
 export {Literals} from './data/literals';
 export {Objects} from './data/objects';
 export {Values} from './data/values';

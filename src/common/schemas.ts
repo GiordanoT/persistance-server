@@ -14,21 +14,29 @@ class Schemas {
     };
     static Classifier = {
         ...this.Named,
+        instanceClassName: {type: String},
+        instanceClass: {type: String},
         defaultValue: {type: String}
     };
-    static Feature = {
+    static Typed = {
         ...this.Named,
         type: {type: String},
         ordered: {type: Boolean},
         unique: {type: Boolean},
         lowerBound: {type: Number},
         upperBound: {type: Number},
+        many: {type: Boolean},
+        required: {type: Boolean}
+    }
+    static Feature = {
+        ...this.Typed,
         changeable: {type: Boolean},
         volatile: {type: Boolean},
         transient: {type: Boolean},
+        defaultValueLiteral: {type: String},
+        defaultValue: {type: String},
         unsettable: {type: Boolean},
-        derived: {type: Boolean},
-        defaultValue: {type: String}
+        derived: {type: Boolean}
     };
     static Instantiable = {
         ...this.Named,

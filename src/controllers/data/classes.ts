@@ -1,5 +1,5 @@
 import {Request, Response} from 'express';
-import {Classes, Attributes, References} from '../../db';
+import {Classes, Attributes, References, Operations} from '../../db';
 import U from '../../common/u';
 
 export class ClassesController {
@@ -19,7 +19,7 @@ export class ClassesController {
                 cls['features'] = [...attributes, ...references];
                 cls['attributes'] = attributes; cls['references'] = references;
                 /* Operations */
-                cls['operations'] = [];
+                cls['operations'] = (await Operations.getByFather(DBClass.id)).map(o => o.id);
                 /* ExtendedBy */
                 cls['extendedBy'] = (await Classes.getByExtend(DBClass.id)).map(c => c.id);
                 classes.push(U.clean(cls));

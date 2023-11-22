@@ -9,6 +9,8 @@ export {ClassesController} from './data/classes';
 export {EnumeratorsController} from './data/enumerators';
 export {AttributesController} from './data/attributes';
 export {ReferencesController} from './data/references';
+export {OperationsController} from './data/operations';
+export {ParametersController} from './data/parameters';
 export {LiteralsController} from './data/literals';
 export {ObjectsController} from './data/objects';
 export {ValuesController} from './data/values';

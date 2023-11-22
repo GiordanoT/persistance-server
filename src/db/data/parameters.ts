@@ -1,11 +1,9 @@
 import {Schema, model} from 'mongoose';
 import Schemas from '../../common/schemas';
 
-export class Values {
+export class Parameters {
     protected static Schema = new Schema({
-        ...Schemas.Instantiable,
-        values: {type: [String]},
-        isMirage: {type: Boolean}
+        ...Schemas.Typed
     });
     protected static Model = model(this.name.slice(0, -1), this.Schema);
     static keys = this.Schema.paths;
