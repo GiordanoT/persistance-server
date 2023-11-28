@@ -14,6 +14,7 @@ import {
     Objects,
     Values,
     Views,
+    Viewpoints,
     Graphs,
     GraphVertexs,
     VoidVertexs,
@@ -22,13 +23,21 @@ import {
     Edges,
     EdgePoints
 } from '../../db';
+import U from "../../common/u";
 
 export class ProjectsController {
     static getOne = async(req: Request, res: Response): Promise<Response> => {
         try {
             const {id} = req.params;
-            const project = await Projects.getById(id);
-            return res.status(200).send(project);
+            const DBProject = await Projects.getById(id);
+            if(!DBProject) return res.status(404).send('Project Not Found.');
+            const project = {}; for(const key in Projects.keys) project[key] = DBProject[key];
+            const metamodels = (await Metamodels.getByProject(DBProject.id)).map(m => m.id);
+            const models = (await Models.getByProject(DBProject.id)).map(m => m.id);
+            const graphs = (await Graphs.getByProject(DBProject.id)).map(g => g.id);
+            const views = (await Views.getByProject(DBProject.id)).map(v => v.id);
+            const viewpoints = (await Viewpoints.getByProject(DBProject.id)).map(v => v.id);
+            return res.status(200).send(U.clean({...project, metamodels, models, graphs, views, viewpoints}));
         } catch(error) {return res.status(400).send(error);}
     }
 
@@ -68,6 +77,7 @@ export class ProjectsController {
                 Values.deleteByProject(id),
                 /* VIEWS */
                 Views.deleteByProject(id),
+                Viewpoints.deleteByProject(id),
                 /* NODES */
                 Graphs.deleteByProject(id),
                 GraphVertexs.deleteByProject(id),

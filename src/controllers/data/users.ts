@@ -1,5 +1,5 @@
 import {Request, Response} from 'express';
-import {Users, Projects, Metamodels, Models, Views, Graphs} from '../../db';
+import {Users, Projects, Metamodels, Models, Views, Viewpoints, Graphs} from '../../db';
 import U from '../../common/u';
 
 export class UsersController {
@@ -53,7 +53,8 @@ export class UsersController {
                 const models = (await Models.getByProject(DBProject.id)).map(m => m.id);
                 const graphs = (await Graphs.getByProject(DBProject.id)).map(g => g.id);
                 const views = (await Views.getByProject(DBProject.id)).map(v => v.id);
-                projects.push(U.clean({...project, metamodels, models, graphs, views}));
+                const viewpoints = (await Viewpoints.getByProject(DBProject.id)).map(v => v.id);
+                projects.push(U.clean({...project, metamodels, models, graphs, views, viewpoints}));
             }
             return res.status(200).send(projects);
         } catch(error) {return res.status(400).send(error);}

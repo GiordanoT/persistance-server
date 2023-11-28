@@ -3,10 +3,12 @@ import {Schema, model} from 'mongoose';
 export class Projects {
     protected static Schema = new Schema({
         id: {type: String},
+        type: {type: String},
         className: {type: String},
         pointedBy: {type: Schema.Types.Mixed},
         name: {type: String},
-        author: {type: String}
+        author: {type: String},
+        activeViewpoint: {type: String}
     });
 
     protected static Model = model(this.name.slice(0, -1), this.Schema);

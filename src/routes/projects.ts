@@ -18,6 +18,7 @@ import {
     ObjectsController,
     ValuesController,
     ViewsController,
+    ViewpointsController,
     GraphsController,
     GraphVertexsController,
     VoidVertexsController,
@@ -45,6 +46,7 @@ const endpoints = [
     {url: '/:id/values', controller: ValuesController},
     /* VIEWS */
     {url: '/:id/views', controller: ViewsController},
+    {url: '/:id/viewpoints', controller: ViewpointsController},
     /* NODES */
     {url: '/:id/graphs', controller: GraphsController},
     {url: '/:id/graphVertexes', controller: GraphVertexsController},
@@ -68,6 +70,10 @@ router
     )
 router
     .route('/:id')
+    .get(
+        AuthMiddleware.isAuthenticated,
+        ProjectsController.getOne
+    )
     .delete(
         AuthMiddleware.isAuthenticated,
         ExistenceMiddleware.project,

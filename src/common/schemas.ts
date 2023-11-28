@@ -57,7 +57,6 @@ class Schemas {
         zIndex: {type: Number},
         view: {type: String},
         zoom: {type: Schema.Types.Mixed},
-        graphSize: {type: Schema.Types.Mixed},
         favoriteNode: {type: Boolean}
     }
 }

@@ -4,7 +4,8 @@ import Schemas from '../../common/schemas';
 export class Graphs {
     protected static Schema = new Schema({
         ...Schemas.GraphElement,
-        sizes: {type: [Schema.Types.Mixed]}
+        sizes: {type: [Schema.Types.Mixed]},
+        offset: {type: [Schema.Types.Mixed]}
     });
     protected static Model = model(this.name.slice(0, -1), this.Schema);
     static keys = this.Schema.paths;
