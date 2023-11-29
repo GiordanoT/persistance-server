@@ -1,5 +1,6 @@
 import {Request, Response} from 'express';
 import {
+    Users,
     Projects,
     Metamodels,
     Models,
@@ -45,6 +46,21 @@ export class ProjectsController {
         try {
             const projects = await Projects.getAll();
             return res.status(200).send(projects);
+        } catch(error) {return res.status(400).send(error);}
+    }
+
+    static getUsers = async(req: Request, res: Response): Promise<Response> => {
+        try {
+            const {id} = req.params;
+            const project = await Projects.getById(id);
+            const pointers = project['collaborators']; pointers.push(project['author']);
+            const collaborators = [];
+            for(const pointer of pointers) {
+                const DBUser = await Users.getById(pointer);
+                const collaborator = {}; for(const key in Users.keys) collaborator[key] = DBUser[key];
+                collaborators.push(U.clean(collaborator, 'DUser'))
+            }
+            return res.status(200).send(collaborators);
         } catch(error) {return res.status(400).send(error);}
     }
 

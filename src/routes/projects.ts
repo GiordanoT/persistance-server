@@ -63,6 +63,13 @@ for(const endpoint of endpoints) {
 }
 
 router
+    .route('/:id/users')
+    .get(
+        AuthMiddleware.isAuthenticated,
+        ProjectsController.getUsers
+    )
+
+router
     .route('/')
     .post(
         AuthMiddleware.isAuthenticated,

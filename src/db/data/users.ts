@@ -12,6 +12,7 @@ export class Users {
     });
 
     protected static Model = model(this.name.slice(0, -1), this.Schema);
+    static keys = this.Schema.paths;
 
     static getAll = () => this.Model.find();
     static getById = (id: string) => this.Model.findOne({id});

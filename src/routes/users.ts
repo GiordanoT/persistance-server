@@ -25,7 +25,7 @@ router
     .get(
         AuthMiddleware.isAuthenticated,
         ExistenceMiddleware.user,
-        UsersController.getOne
+        UsersController.getById
     )
     .patch(
         AuthMiddleware.isAuthenticated,
