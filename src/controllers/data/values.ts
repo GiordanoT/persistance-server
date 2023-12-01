@@ -21,7 +21,7 @@ export class ValuesController {
     static create = async (req: Request, res: Response): Promise<Response> => {
         try {
             const {id} = req.params; const body = req.body;
-            if(body.id) await Values.deleteById(body.id);
+            // if(body.id) await Values.deleteById(body.id);
             const element = Values.create({...body, projectId: id});
             return res.status(200).send(element);
         } catch(error) {return res.status(400).send(error);}

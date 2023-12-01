@@ -9,4 +9,4 @@ RUN npm install
 
 EXPOSE 5002
 
-CMD ["npm", "run", "prod"]
+CMD ["npm", "run", "docker"]
