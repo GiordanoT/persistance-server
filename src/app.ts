@@ -21,8 +21,10 @@ app.use(cookieParser());
 app.use(bodyParser.json());
 
 /* Server */
+const PORT = 5002;
 const server = http.createServer(app);
-server.listen(5002);
+server.listen(PORT);
+console.log(`Server Listening on port ${PORT}.`);
 
 /* Database */
 (async function() {
