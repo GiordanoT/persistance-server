@@ -9,16 +9,12 @@ export class AuthController {
             if (!username || !email || !password) return res.status(400).send('Missing required parameters.');
             const existingEmail = await Users.getByEmail(email);
             if (existingEmail) return res.status(400).send('Email already taken.');
-            const id = `${Date.now()}_USER`;
-            const user = await Users.create({id, username, email,
-                authentication: {
-                    password: U.encrypt(password),
-                    token: U.encrypt(U.random())
-                }
+            const user = await Users.create({username, email,
+                id: `Pointer${Date.now()}_USER_${username}`,
+                password: U.encrypt(password),
+                token: U.token()
             });
-            res.cookie('AUTH-TOKEN', user.authentication.token, {domain: process.env['DOMAIN'], path: '/'});
-            delete user['authentication']; delete user['_id']; delete user['__v'];
-            return res.status(200).send(U.clean(user));
+            return res.status(200).send(user);
         } catch (error) {return res.status(400).send(error);}
     }
 
@@ -26,25 +22,21 @@ export class AuthController {
         try {
             const {email, password} = req.body;
             if (!email || !password) return res.status(400).send('Missing required parameters.');
-            const user = await Users.getByEmail(email).select('+authentication.password');
+            const user = await Users.getByEmail(email);
             if (!user) return res.status(403).send('Bad Credentials.');
-            if(user.authentication.password !== U.encrypt(password)) return res.status(403).send('Bad Credentials.');
-            user.authentication.token = U.encrypt(U.random());
+            if(user.password !== U.encrypt(password)) return res.status(403).send('Bad Credentials.');
+            user.token = U.token();
             await user.save();
-            res.cookie('AUTH-TOKEN', user.authentication.token, {domain: process.env['DOMAIN'], path: '/'});
-            delete user['authentication']; delete user['_id']; delete user['__v'];
             return res.status(200).send(user);
         } catch (error) {return res.status(400).send(error);}
     }
 
     static logout = async (req: Request, res: Response): Promise<Response> => {
         try {
-            const token = req.cookies['AUTH-TOKEN'];
+            const token = String(req.headers['auth-token']);
             const user = await Users.getByToken(token);
-            user.authentication.token = '';
-            await user.save();
-            res.cookie('AUTH-TOKEN', '', {domain: process.env['DOMAIN'], path: '/'});
-            return res.status(200).send('Logged out.');
+            user.token = ''; await user.save();
+            return res.status(200).send(user);
         } catch (error) {return res.status(400).send(error);}
     }
 }

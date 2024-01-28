@@ -1,3 +1,2 @@
-export {AuthRouter} from './auth';
-export {UsersRouter} from './users';
-export {ProjectsRouter} from './projects';
+export {AuthRouter} from './auth/router';
+export {ProjectsRouter} from './projects/router';

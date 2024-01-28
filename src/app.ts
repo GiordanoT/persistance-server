@@ -1,24 +1,18 @@
 import express from 'express';
 import cors from 'cors';
 import compression from 'compression';
-import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import http from 'http';
 import mongoose from 'mongoose';
 import U from './common/u';
-import {
-    AuthRouter,
-    UsersRouter,
-    ProjectsRouter
-} from './routes';
+import {AuthRouter, ProjectsRouter} from './routes';
 
 const app = express();
 
 app.use(express.static('public'));
 app.use(cors({credentials: true}));
 app.use(compression());
-app.use(cookieParser());
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '64mb'}));
 
 /* Server */
 const PORT = 5002;
@@ -46,5 +40,4 @@ console.log(`Server Listening on port ${PORT}.`);
 /* Routes */
 const root = 'persistance';
 app.use(`/${root}/auth`, AuthRouter);
-app.use(`/${root}/users`, UsersRouter);
 app.use(`/${root}/projects`, ProjectsRouter);

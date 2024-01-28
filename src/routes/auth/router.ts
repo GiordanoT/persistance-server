@@ -1,6 +1,6 @@
 import {Router} from 'express';
-import {AuthController} from '../controllers';
-import AuthMiddleware from '../middlewares/auth';
+import {AuthController} from './controller';
+import AuthMiddleware from '../../middlewares/auth';
 
 const router = Router();
 
@@ -14,7 +14,7 @@ router
 
 router
     .route('/logout')
-    .get(AuthMiddleware.isAuthenticated, AuthController.logout)
+    .delete(AuthMiddleware.isAuthenticated, AuthController.logout)
 
 export {router as AuthRouter};
 
