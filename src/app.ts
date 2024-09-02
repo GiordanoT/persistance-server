@@ -5,12 +5,11 @@ import bodyParser from 'body-parser';
 import http from 'http';
 import mongoose from 'mongoose';
 import U from './common/u';
-import {AuthRouter, ProjectsRouter} from './routes';
+import {AuthRouter, UsersRouter, ProjectsRouter} from './routes';
 
 const app = express();
-
 app.use(express.static('public'));
-app.use(cors({credentials: true}));
+app.use(cors({credentials: true, origin: 'http://localhost:3000', methods: '*'}));
 app.use(compression());
 app.use(bodyParser.json({limit: '64mb'}));
 
@@ -18,6 +17,7 @@ app.use(bodyParser.json({limit: '64mb'}));
 const PORT = 5002;
 const server = http.createServer(app);
 server.listen(PORT);
+console.log('********** JJodel Persistance Server v1.3  **********');
 console.log(`Server Listening on port ${PORT}.`);
 
 /* Database */
@@ -40,4 +40,5 @@ console.log(`Server Listening on port ${PORT}.`);
 /* Routes */
 const root = 'persistance';
 app.use(`/${root}/auth`, AuthRouter);
+app.use(`/${root}/users`, UsersRouter);
 app.use(`/${root}/projects`, ProjectsRouter);

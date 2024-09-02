@@ -7,8 +7,9 @@ export class ProjectsController {
         try {
             const token = String(req.headers['auth-token']);
             const author = await Users.getByToken(token);
-            const projects = await Projects.getByAuthor(author.id);
-            return res.status(200).send(projects);
+            const myProjects = await Projects.getByAuthor(author.id);
+            const sharedProjects = await Projects.getByCollaborator(author.id);
+            return res.status(200).send([...myProjects, ...sharedProjects]);
         } catch (error) {return res.status(400).send(error);}
     }
     static getOne = async (req: Request, res: Response): Promise<Response> => {
