@@ -5,12 +5,13 @@ import U from '../../common/u';
 export class AuthController {
     static register = async (req: Request, res: Response): Promise<Response> => {
         try {
-            const {username, email, password} = req.body;
-            if (!username || !email || !password) return res.status(400).send('Missing required parameters.');
+            const {name, surname, nickname, affiliation, country, newsletter, email, password} = req.body;
+            if (!name || !surname || !nickname || !country || !email || !password)
+                return res.status(400).send('Missing required parameters.');
             const existingEmail = await Users.getByEmail(email);
             if (existingEmail) return res.status(400).send('Email already taken.');
-            const user = await Users.create({username, email,
-                id: `Pointer${Date.now()}_USER_${username}`,
+            const user = await Users.create({name, surname, nickname, affiliation, country, newsletter,  email,
+                id: `Pointer${Date.now()}_USER_${name}_${surname}`,
                 password: U.encrypt(password),
                 token: U.token()
             });

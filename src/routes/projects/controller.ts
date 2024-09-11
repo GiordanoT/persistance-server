@@ -22,11 +22,22 @@ export class ProjectsController {
     }
     static create = async (req: Request, res: Response): Promise<Response> => {
         try {
-            const {id, name, type} = req.body;
-            if (!id || !name || !type) return res.status(400).send('Missing required parameters.');
+            const {id, name, type, creation} = req.body;
+            if (!id || !name || !type || !creation)
+                return res.status(400).send('Missing required parameters.');
             const token = String(req.headers['auth-token']);
             const author = await Users.getByToken(token);
-            await Projects.create({id, name, type, state: '', author: author.id, collaborators: []});
+            await Projects.create({id, name, type, creation,
+                state: '',
+                author: author.id,
+                viewpoints: 0,
+                metamodels: 0,
+                models: 0,
+                lastModified: creation,
+                description: '',
+                isFavorite: false,
+                collaborators: []
+            });
             return res.status(200).send('Project Created.');
         } catch (error) {return res.status(400).send(error);}
     }
@@ -39,12 +50,23 @@ export class ProjectsController {
             return res.status(200).send('Project Deleted.');
         } catch (error) {return res.status(400).send(error);}
     }
-    static edit = async (req: Request, res: Response): Promise<Response> => {
+    static update = async (req: Request, res: Response): Promise<Response> => {
         try {
             const {id} = req.params;
             const project = await Projects.getById(id);
             if(!project) return res.status(400).send('Project Not Found.');
-            const body = U.keepKeys(req.body, ['name', 'state', 'collaborators']);
+            const body = U.keepKeys(req.body, [
+                'name',
+                'state',
+                'type',
+                'viewpoints',
+                'metamodels',
+                'models',
+                'lastModified',
+                'description',
+                'isFavorite',
+                'collaborators'
+            ]);
             await Projects.update(id, body);
             return res.status(200).send('Project Edited.');
         } catch (error) {return res.status(400).send(error);}

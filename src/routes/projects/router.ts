@@ -12,7 +12,7 @@ router
 router
     .route('/:id')
     .get(AuthMiddleware.isAuthenticated, ProjectsController.getOne)
-    .patch(AuthMiddleware.isAuthenticated, ProjectsController.edit)
+    .patch(AuthMiddleware.isAuthenticated, ProjectsController.update)
     .delete(AuthMiddleware.isAuthenticated, ProjectsController.delete)
 
 

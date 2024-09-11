@@ -7,6 +7,13 @@ export class Projects {
         type: {type: String},
         state: {type: String},
         author: {type: String},
+        viewpoints: {type: Number},
+        metamodels: {type: Number},
+        models: {type: Number},
+        lastModified: {type: Number},
+        created: {type: Number},
+        description: {type: String},
+        isFavorite: {type: Boolean},
         collaborators: {type: [String]}
     });
 

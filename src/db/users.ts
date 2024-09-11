@@ -3,7 +3,12 @@ import {Schema, model} from 'mongoose';
 export class Users {
     protected static Schema = new Schema({
         id: {type: String},
-        username: {type: String},
+        name: {type: String},
+        surname: {type: String},
+        nickname: {type: String},
+        affiliation: {type: String},
+        country: {type: String},
+        newsletter: {type: Boolean},
         email: {type: String},
         password: {type: String},
         token: {type: String}

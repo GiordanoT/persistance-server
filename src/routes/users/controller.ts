@@ -1,5 +1,6 @@
 import {Request, Response} from 'express';
 import {Users} from '../../db';
+import U from '../../common/u';
 
 export class UsersController {
     static getById = async(req: Request, res: Response): Promise<Response> => {
@@ -27,10 +28,31 @@ export class UsersController {
     static update = async(req: Request, res: Response): Promise<Response> => {
         try {
             const {id} = req.params;
-            const {username} = req.body;
+            const body = U.keepKeys(req.body, [
+                'name',
+                'surname',
+                'nickname',
+                'affiliation',
+                'country',
+                'newsletter'
+            ]);
             const user = await Users.getById(id);
             if(!user) return res.status(404).send('User not found.');
-            await Users.update(id, {username});
+            await Users.update(id, body);
+            return res.status(200).send('User updated.');
+        } catch(error) {
+            return res.status(400).send(error);
+        }
+    }
+
+    static password = async(req: Request, res: Response): Promise<Response> => {
+        try {
+            const {email} = req.body;
+            const user = await Users.getByEmail(email);
+            if(!user) return res.status(404).send('User not found.');
+            const password = U.random();
+            await Users.update(user.id, {password: U.encrypt(password)});
+            // Todo: send email to user with the new password
             return res.status(200).send('User updated.');
         } catch(error) {
             return res.status(400).send(error);
