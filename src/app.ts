@@ -17,7 +17,7 @@ app.use(bodyParser.json({limit: '64mb'}));
 const PORT = 5002;
 const server = http.createServer(app);
 server.listen(PORT);
-console.log('********** JJodel Persistance Server v1.5  **********');
+console.log('********** JJodel Persistance Server v1.6  **********');
 console.log(`Server Listening on port ${PORT}.`);
 
 /* Database */

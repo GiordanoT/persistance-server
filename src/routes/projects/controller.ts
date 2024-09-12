@@ -22,19 +22,18 @@ export class ProjectsController {
     }
     static create = async (req: Request, res: Response): Promise<Response> => {
         try {
-            const {id, name, type, creation} = req.body;
+            const {id, name, type, creation, description} = req.body;
             if (!id || !name || !type || !creation)
                 return res.status(400).send('Missing required parameters.');
             const token = String(req.headers['auth-token']);
             const author = await Users.getByToken(token);
-            await Projects.create({id, name, type, creation,
+            await Projects.create({id, name, type, creation, description,
                 state: '',
                 author: author.id,
-                viewpoints: 0,
-                metamodels: 0,
-                models: 0,
+                viewpointsNumber: 0,
+                metamodelsNumber: 0,
+                modelsNumber: 0,
                 lastModified: creation,
-                description: '',
                 isFavorite: false,
                 collaborators: []
             });
@@ -59,9 +58,9 @@ export class ProjectsController {
                 'name',
                 'state',
                 'type',
-                'viewpoints',
-                'metamodels',
-                'models',
+                'viewpointsNumber',
+                'metamodelsNumber',
+                'modelsNumber',
                 'lastModified',
                 'description',
                 'isFavorite',
