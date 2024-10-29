@@ -10,10 +10,11 @@ export class AuthController {
                 return res.status(400).send('Missing required parameters.');
             const existingEmail = await Users.getByEmail(email);
             if (existingEmail) return res.status(400).send('Email already taken.');
-            const user = await Users.create({name, surname, nickname, affiliation, country, newsletter,  email,
+            const user = await Users.create({name, surname, nickname, affiliation, country,  email,
                 id: `Pointer${Date.now()}_USER_${name}_${surname}`,
                 password: U.encrypt(password),
-                token: U.token()
+                token: U.token(),
+                newsletter: newsletter
             });
             return res.status(200).send(user);
         } catch (error) {return res.status(400).send(error);}

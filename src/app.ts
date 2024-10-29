@@ -5,7 +5,7 @@ import bodyParser from 'body-parser';
 import http from 'http';
 import mongoose from 'mongoose';
 import U from './common/u';
-import {AuthRouter, UsersRouter, ProjectsRouter, ErrorsRouter} from './routes';
+import {AuthRouter, UsersRouter, ProjectsRouter, ErrorsRouter, AdminRouter} from './routes';
 
 const app = express();
 app.use(express.static('public'));
@@ -43,3 +43,4 @@ app.use(`/${root}/auth`, AuthRouter);
 app.use(`/${root}/users`, UsersRouter);
 app.use(`/${root}/projects`, ProjectsRouter);
 app.use(`/${root}/errors`, ErrorsRouter);
+app.use(`/${root}/admin`, AdminRouter);
